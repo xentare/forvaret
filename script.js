@@ -35,16 +35,16 @@ function game() {
 		drawWahlroos();
 		drawGold();
 		
-		if(rightPressed) {
+		if(rightPressed && x <= canvas.width - width) {
 			x += 7;
 		}
-		else if(leftPressed) {
+		else if(leftPressed && x >= 0) {
 			x -= 7;
 		}
-		if(downPressed) {
+		if(downPressed && y <= canvas.height - height) {
 			y += 7;
 		}
-		else if(upPressed) {
+		else if(upPressed && y >= 0) {
 			y -= 7;
 		}
 		
