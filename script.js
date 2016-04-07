@@ -16,6 +16,14 @@ function game() {
 	var scoreX = 10;
 	var scoreY = canvas.height - 20;
 	
+	var hudWidth = canvas.width;
+	var hudHeight = 60;
+	var hudX = 0;
+	var hudY = canvas.height - hudHeight;
+	
+	var levelWidth = canvas.width;
+	var levelHeight = canvas.height - hudHeight;
+	
 	var coinX = 500;
 	var coinY = 200;
 	var coinWidth = 30;
@@ -37,8 +45,8 @@ function game() {
 			score++;
 			
 			do {
-				coinX = Math.floor((Math.random() * canvas.width - coinWidth) + coinWidth);
-				coinY = Math.floor((Math.random() * canvas.height - coinHeight) + coinHeight);
+				coinX = Math.floor((Math.random() * levelWidth - coinWidth) + coinWidth);
+				coinY = Math.floor((Math.random() * levelHeight - coinHeight) + coinHeight);
 			}
 			while(wahlroosX + wahlroosWidth > coinX && wahlroosX < coinX + coinWidth &&
 			wahlroosY + wahlroosHeight > coinY && wahlroosY < coinY + coinHeight);
@@ -62,21 +70,30 @@ function game() {
 		ctx.fillText("Score: " + score, scoreX, scoreY);
 	}
 	
+	function drawHud() {
+		ctx.beginPath();
+		ctx.rect(hudX, hudY, hudWidth, hudHeight);
+		ctx.fillStyle = "#000000"
+		ctx.fill();
+		ctx.closePath();
+	}
+	
 	function draw() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		
 		drawGoldCoin();
 		drawWahlroos();
+		drawHud();
 		drawScore();
 		collisionDetection();
 		
-		if(rightPressed && wahlroosX <= canvas.width - wahlroosWidth) {
+		if(rightPressed && wahlroosX <= levelWidth - wahlroosWidth) {
 			wahlroosX += 7;
 		}
 		else if(leftPressed && wahlroosX >= 0) {
 			wahlroosX -= 7;
 		}
-		if(downPressed && wahlroosY <= canvas.height - wahlroosHeight) {
+		if(downPressed && wahlroosY <= levelHeight - wahlroosHeight) {
 			wahlroosY += 7;
 		}
 		else if(upPressed && wahlroosY >= 0) {
