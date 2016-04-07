@@ -7,9 +7,9 @@ function game() {
 	var my_image = new Image();
 	my_image.src = "wahlroos.png";
 
-	var x = 0;
-	var y = 0;
-	var width = 250;
+	var wahloosX = 0;
+	var wahloosY = 0;
+	var width = 150;
 	var height = 175;
 	
 	var rightPressed = false;
@@ -18,10 +18,10 @@ function game() {
 	var upPressed = false;
 
 	function drawWahlroos() {
-		ctx.drawImage(my_image, x, y, width, height);
+		ctx.drawImage(my_image, wahloosX, wahloosY, width, height);
 	}
 	
-	function drawGold() {
+	function drawGoldCoin() {
 		ctx.beginPath();
 		ctx.rect(500, 100, 30, 30);
 		ctx.fillStyle = "#FFFF00"
@@ -33,19 +33,19 @@ function game() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		
 		drawWahlroos();
-		drawGold();
+		drawGoldCoin();
 		
-		if(rightPressed && x <= canvas.width - width) {
-			x += 7;
+		if(rightPressed && wahloosX <= canvas.width - width) {
+			wahloosX += 7;
 		}
-		else if(leftPressed && x >= 0) {
-			x -= 7;
+		else if(leftPressed && wahloosX >= 0) {
+			wahloosX -= 7;
 		}
-		if(downPressed && y <= canvas.height - height) {
-			y += 7;
+		if(downPressed && wahloosY <= canvas.height - height) {
+			wahloosY += 7;
 		}
-		else if(upPressed && y >= 0) {
-			y -= 7;
+		else if(upPressed && wahloosY >= 0) {
+			wahloosY -= 7;
 		}
 		
 		requestAnimationFrame(draw);
