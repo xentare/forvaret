@@ -54,6 +54,10 @@ function game() {
 	  }
 	}
 
+	function drawWahlroos() {
+	  ctx.drawImage(my_image, wahlroosX, wahlroosY, wahlroosWidth, wahlroosHeight);
+	}
+
 	function drawGoldCoin() {
 	  ctx.beginPath();
 	  ctx.rect(coinX, coinY, coinWidth, coinHeight);
@@ -62,8 +66,17 @@ function game() {
 	  ctx.closePath();
 	}
 
-	function drawWahlroos() {
-	  ctx.drawImage(my_image, wahlroosX, wahlroosY, wahlroosWidth, wahlroosHeight);
+	function drawScore() {
+	  ctx.fillStyle = "#FF0000";
+	  ctx.fillText("Score: " + score, scoreX, scoreY);
+	}
+
+	function drawHud() {
+	  ctx.beginPath();
+	  ctx.rect(hudX, hudY, hudWidth, hudHeight);
+	  ctx.fillStyle = "#000000"
+	  ctx.fill();
+	  ctx.closePath();
 	}
 
 	function draw() {
@@ -71,6 +84,8 @@ function game() {
 
 	  drawGoldCoin();
 	  drawWahlroos();
+	  drawHud();
+	  drawScore();
 	  collisionDetection();
 
 	  if(rightPressed && wahlroosX <= levelWidth - wahlroosWidth) {
@@ -133,4 +148,4 @@ function game() {
 
 	start();
 	draw();
-}
+	}
