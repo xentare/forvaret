@@ -38,5 +38,99 @@ function game() {
 
 	}
 
-	
+	function collisionDetection() {
+	  if(wahlroosX + wahlroosWidth > coinX && wahlroosX < coinX + coinWidth &&
+	  wahlroosY + wahlroosHeight > coinY && wahlroosY < coinY + coinHeight) {
+
+	    score++;
+
+	    do {
+	      coinX = Math.floor((Math.random() * levelWidth - coinWidth) + coinWidth);
+	      coinY = Math.floor((Math.random() * levelHeight - coinHeight) + coinHeight);
+	    }
+	    while(wahlroosX + wahlroosWidth > coinX && wahlroosX < coinX + coinWidth &&
+	    wahlroosY + wahlroosHeight > coinY && wahlroosY < coinY + coinHeight);
+	  }
+	}
+
+	function drawGoldCoin() {
+	  ctx.beginPath();
+	  ctx.rect(coinX, coinY, coinWidth, coinHeight);
+	  ctx.fillStyle = "#FFFF00"
+	  ctx.fill();
+	  ctx.closePath();
+	}
+
+	function drawWahlroos() {
+	  ctx.drawImage(my_image, wahlroosX, wahlroosY, wahlroosWidth, wahlroosHeight);
+	}
+
+	function draw() {
+	  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	  drawGoldCoin();
+	  drawWahlroos();
+	  collisionDetection();
+
+	  if(rightPressed && wahlroosX <= levelWidth - wahlroosWidth) {
+	    wahlroosX += 7;
+	  }
+	  else if(leftPressed && wahlroosX >= 0) {
+	    wahlroosX -= 7;
+	  }
+	  if(downPressed && wahlroosY <= levelHeight - wahlroosHeight) {
+	    wahlroosY += 7;
+	  }
+	  else if(upPressed && wahlroosY >= 0) {
+	    wahlroosY -= 7;
+	  }
+
+	  requestAnimationFrame(draw);
+	  //setInterval(draw(), 10);
+	}
+
+	function keyDownHandler(e) {
+	  // right arrow
+	  if(e.keyCode == 39) {
+	    rightPressed = true;
+	  }
+	  // left arrow
+	  if(e.keyCode == 37) {
+	    leftPressed = true;
+	  }
+	  // down arrow
+	  if(e.keyCode == 40) {
+	    downPressed = true;
+	  }
+	  // up arrow
+	  if(e.keyCode == 38) {
+	    upPressed = true;
+	  }
+	}
+
+	function keyUpHandler(e) {
+	  // right arrow
+	  if(e.keyCode == 39) {
+	    rightPressed = false;
+	  }
+	  // up arrow
+	  if(e.keyCode == 37) {
+	    leftPressed = false;
+	  }
+	  // down arrow
+	  if(e.keyCode == 40) {
+	    downPressed = false;
+	  }
+	  // up arrow
+	  if(e.keyCode == 38) {
+	    upPressed = false;
+	  }
+	}
+
+	document.addEventListener("keydown", keyDownHandler, false);
+	document.addEventListener("keyup", keyUpHandler, false);
+
+	start();
+	draw();
+
 }
