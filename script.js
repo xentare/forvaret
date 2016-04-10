@@ -35,5 +35,75 @@ function game() {
 	var upPressed = false;
 
 	function start() {
-		
+
+	}
+
+	function drawWahlroos() {
+	  ctx.drawImage(my_image, wahlroosX, wahlroosY, wahlroosWidth, wahlroosHeight);
+	}
+
+	function draw() {
+	  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	  drawWahlroos();
+
+	  if(rightPressed && wahlroosX <= levelWidth - wahlroosWidth) {
+	    wahlroosX += 7;
+	  }
+	  else if(leftPressed && wahlroosX >= 0) {
+	    wahlroosX -= 7;
+	  }
+	  if(downPressed && wahlroosY <= levelHeight - wahlroosHeight) {
+	    wahlroosY += 7;
+	  }
+	  else if(upPressed && wahlroosY >= 0) {
+	    wahlroosY -= 7;
+	  }
+
+	  requestAnimationFrame(draw);
+	  //setInterval(draw(), 10);
+	}
+
+	function keyDownHandler(e) {
+	  // right arrow
+	  if(e.keyCode == 39) {
+	    rightPressed = true;
+	  }
+	  // left arrow
+	  if(e.keyCode == 37) {
+	    leftPressed = true;
+	  }
+	  // down arrow
+	  if(e.keyCode == 40) {
+	    downPressed = true;
+	  }
+	  // up arrow
+	  if(e.keyCode == 38) {
+	    upPressed = true;
+	  }
+	}
+
+	function keyUpHandler(e) {
+	  // right arrow
+	  if(e.keyCode == 39) {
+	    rightPressed = false;
+	  }
+	  // up arrow
+	  if(e.keyCode == 37) {
+	    leftPressed = false;
+	  }
+	  // down arrow
+	  if(e.keyCode == 40) {
+	    downPressed = false;
+	  }
+	  // up arrow
+	  if(e.keyCode == 38) {
+	    upPressed = false;
+	  }
+	}
+	document.addEventListener("keydown", keyDownHandler, false);
+	document.addEventListener("keyup", keyUpHandler, false);
+
+	start();
+	draw();
 	}
