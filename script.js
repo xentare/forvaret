@@ -38,6 +38,7 @@ function game() {
 
 	}
 
+
 	function collisionDetection() {
 	  if(wahlroosX + wahlroosWidth > coinX && wahlroosX < coinX + coinWidth &&
 	  wahlroosY + wahlroosHeight > coinY && wahlroosY < coinY + coinHeight) {
@@ -132,5 +133,4 @@ function game() {
 
 	start();
 	draw();
-
 }
